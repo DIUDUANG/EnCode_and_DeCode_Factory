@@ -18,7 +18,11 @@ class Codec : public SequenceASN1 {
   //解码(虚函数)
   virtual int msgDecode(char* inData, int inLen);
   //内存释放(虚函数)
-  virtual void msgMemFree(void** point);
+  virtual int msgMemFree(void** point);
+
+ private:
+  //防止自动生成拷贝构造和重载复制运算符
+  DISALLOW_COPY_AND_ASSIGN(Codec);
 };
 
 #endif

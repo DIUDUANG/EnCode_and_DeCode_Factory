@@ -4,6 +4,7 @@
         Typename(const Typename&); \
         void operator=(const Typename&)
 #include "BaseASN1.h"
+#include "ItcastLog.h"
 
 //对象化的ASN1操作类
 class SequenceASN1 : public BaseASN1 {
@@ -27,7 +28,7 @@ SequenceASN1();
 
  //解码普通节点
  int readNextNode(int& iValue); //整型
- int readNexxtNode(char* sValue); //字符串
+ int readNextNode(char* sValue); //字符串
 
  //编码序列
  int packSequence(char** outData, int& outLen);
@@ -38,12 +39,13 @@ SequenceASN1();
  void freeSequnce(ITCAST_ANYBUF* node = NULL);
 
  private:
-  //防止自动合成拷贝构造和重载赋值运算符
-  DISALLOW_COPY_AND_ASSIGN(SequenceASN1);
-
   ITCAST_ANYBUF* m_header; //头节点
   ITCAST_ANYBUF* m_next; //尾节点
   ITCAST_ANYBUF* m_temp; //临时节点
+  ItcastLog LogASN1;  //日志类
+
+  //防止自动合成拷贝构造和重载赋值运算符
+  DISALLOW_COPY_AND_ASSIGN(SequenceASN1);
 };
 
 

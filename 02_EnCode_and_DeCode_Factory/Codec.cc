@@ -19,7 +19,7 @@ int Codec::msgDecode(char* inData, int inLen) {
 }
 
 //ÊÍ·ÅÄÚ´æ(Ðéº¯Êý)
-void Codec::msgMemFree(void** point) {
+int Codec::msgMemFree(void** point) {
 
-  return;
+  return 0;
 }

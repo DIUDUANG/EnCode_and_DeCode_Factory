@@ -1,5 +1,8 @@
 #ifndef __02_REQUESTCODEC_H__
 #define __02_REQUESTCODEC_H__
+#define DISALLOW_COPY_AND_ASSIGN(Typename) \
+        Typename(const Typename&) \
+        void operator=(const Typename&)
 #include "Codec.h"
 
 //请求报文结构体类型
@@ -15,13 +18,26 @@ struct RequestMsg
 
 class RequestCodec : public Codec {
  public:
+  //构造
+  RequestCodec();
+  explicit RequestCodec(RequestMsg* msg);
+  //析构
+  ~RequestCodec();
+
+
   //编码(重写)
   int msgEncode(char** outData, int& len) override;
   //解码(重写)
   int msgDecode(char* inData, int inLen) override;
-  //内存释放(重写)
-  void msgMemFree(void** point) override;
+  //释放报文请求结构体(重写)
+  int msgMemFree(void** point) override;
 
+ private:
+  //请求报文结构体
+  RequestMsg* mRequsetMsg; 
+
+  //防止自动生成拷贝构造和重载赋值运算符
+  DISALLOW_COPY_AND_ASSIGN(RequestCodec);
 };
 
 #endif

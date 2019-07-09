@@ -15,6 +15,11 @@ int SequenceASN1::writeHeadNode(int iValue) {
   //参数判断
   if (NULL == iValue) {
     printf("writeHeadNode-int: the parameter in invalid...\n");
+    LogASN1.Log(__FILE__, 
+                 __LINE__, 
+                 ItcastLog::ERROR, 
+                 3, 
+                 "writeHeadNode-int: the parameter in invalid...\n");
     return 3;
   }
 
@@ -22,6 +27,11 @@ int SequenceASN1::writeHeadNode(int iValue) {
                                        &m_header);
   if (0 != retval) {
     printf("writeHeadNode-int failed...\n");
+    LogASN1.Log(__FILE__, 
+                 __LINE__, 
+                 ItcastLog::ERROR, 
+                 11, 
+                 "writeHeadNode-int failed...\n");
     return 11;
   }
 
@@ -37,12 +47,22 @@ int SequenceASN1::writeHeadNode(char* sValue, int len) {
   //参数判断
   if (NULL == sValue || len <= 0) {
     printf("writeHeadNode-char: the parameter is invalid...\n");
+    LogASN1.Log(__FILE__, 
+                 __LINE__, 
+                 ItcastLog::ERROR, 
+                 4, 
+                 "writeHeadNode-char: the parameter is invalid...\n");
     return 4;
   }
 
   int retval = EncodeChar(sValue, len, &m_header);
   if (0 != retval) {
     printf("writeHeadNode-char failed...\n");
+    LogASN1.Log(__FILE__, 
+                 __LINE__, 
+                 ItcastLog::ERROR, 
+                 12, 
+                 "writeHeadNode-char failed...\n");
     return 12;
   }
 
@@ -57,6 +77,11 @@ int SequenceASN1::writeNextNode(int iValue) {
   //参数判断
   if (NULL == iValue) {
     printf("writeNextNode-int: the parameter in invalid...\n");
+    LogASN1.Log(__FILE__, 
+                 __LINE__, 
+                 ItcastLog::ERROR, 
+                 3, 
+                 "writeNextNode-int: the parameter in invalid...\n");
     return 3;
   }
 
@@ -64,6 +89,11 @@ int SequenceASN1::writeNextNode(int iValue) {
                                        &m_next);
   if (0 != retval) {
     printf("writeNextNode-int failed...\n");
+    LogASN1.Log(__FILE__, 
+                 __LINE__, 
+                 ItcastLog::ERROR, 
+                 13, 
+                 "writeNextNode-int failed...\n");
     return 13;
   }
 
@@ -79,12 +109,22 @@ int SequenceASN1::writeNextNode(char* sValue, int len) {
   //参数判断
   if (NULL == sValue || len <= 0) {
     printf("writeNextNode-char: the parameter is invalid...\n");
+    LogASN1.Log(__FILE__, 
+                 __LINE__, 
+                 ItcastLog::ERROR, 
+                 4, 
+                 "writeNextNode-char: the parameter is invalid...\n");
     return 4;
   }
 
   int retval = EncodeChar(sValue, len, &m_next);
   if (0 != retval) {
-    printf("writeNextNode-cahr failed...\n");
+    printf("writeNextNode-char failed...\n");
+    LogASN1.Log(__FILE__, 
+                 __LINE__, 
+                 ItcastLog::ERROR, 
+                 14, 
+                 "writeNextNode-char failed...\n");
     return 14;
   }
 
@@ -100,6 +140,11 @@ int SequenceASN1::readHeadNode(int& iValue) {
   //头结点判断
   if (NULL == m_header) {
     printf("m_header == NULL\n");
+    LogASN1.Log(__FILE__, 
+                 __LINE__, 
+                 ItcastLog::ERROR, 
+                 50, 
+                 "m_header == NULL\n");
     return 50;
   }
 
@@ -109,6 +154,11 @@ int SequenceASN1::readHeadNode(int& iValue) {
 
   if (0 != retval) {
     printf("readHeadNode-int failed...\n");
+    LogASN1.Log(__FILE__, 
+                 __LINE__, 
+                 ItcastLog::ERROR, 
+                 15, 
+                 "readHeadNode-int failed...\n");
     return 15;
   }
 
@@ -122,12 +172,22 @@ int SequenceASN1::readHeadNode(char* sValue) {
   //头结点判断
   if (NULL == m_header) {
     printf("m_header == NULL\n");
+    LogASN1.Log(__FILE__, 
+                 __LINE__, 
+                 ItcastLog::ERROR, 
+                 50, 
+                 "m_header == NULL\n");
     return 50;
   }
 
   int retval = DecodeChar(m_header, &sValue, NULL);//bug
   if (0 != retval) {
     printf("readHeadNode-cahr failed...\n");
+    LogASN1.Log(__FILE__, 
+                 __LINE__, 
+                 ItcastLog::ERROR, 
+                 16, 
+                 "readHeadNode-cahr failed...\n");
     return 16;
   }
 
@@ -141,6 +201,11 @@ int SequenceASN1::readNextNode(int& iValue) {
   //节点判断
   if (NULL == m_next) {
     printf("m_next == NULL\n");
+    LogASN1.Log(__FILE__, 
+                 __LINE__, 
+                 ItcastLog::ERROR, 
+                 51, 
+                 "m_next == NULL\n");
     return 51;
   }
 
@@ -150,6 +215,11 @@ int SequenceASN1::readNextNode(int& iValue) {
 
   if (0 != retval) {
     printf("readHeadNode-int failed...\n");
+    LogASN1.Log(__FILE__, 
+                 __LINE__, 
+                 ItcastLog::ERROR, 
+                 17, 
+                 "readHeadNode-int failed...\n");
     return 17;
   }
 
@@ -158,17 +228,27 @@ int SequenceASN1::readNextNode(int& iValue) {
 }
 
  //解码普通节点//字符串
-int SequenceASN1::readNexxtNode(char* sValue) {
+int SequenceASN1::readNextNode(char* sValue) {
 
   //节点判断
   if (NULL == m_next) {
     printf("m_next == NULL\n");
+    LogASN1.Log(__FILE__, 
+                 __LINE__, 
+                 ItcastLog::ERROR, 
+                 51, 
+                 "m_next == NULL\n");
     return 51;
   }
 
   int retval = DecodeChar(m_next, &sValue, NULL);//bug
   if (0 != retval) {
     printf("readHeadNode-int failed...\n");
+    LogASN1.Log(__FILE__, 
+                 __LINE__, 
+                 ItcastLog::ERROR, 
+                 18, 
+                 "readHeadNode-int failed...\n");
     return 18;
   }
 
@@ -183,6 +263,11 @@ int SequenceASN1::packSequence(char** outData, int& outLen) {
   int retval = DER_ItAsn1_WriteSequence(m_header, &tmp_anybuf);
   if (0 != retval) {
     printf("packSequence failed...\n");
+    LogASN1.Log(__FILE__, 
+                 __LINE__, 
+                 ItcastLog::ERROR, 
+                 20, 
+                 "packSequence failed...\n");
     return 20;
   }
 
@@ -190,6 +275,11 @@ int SequenceASN1::packSequence(char** outData, int& outLen) {
   *outData = static_cast<char*>(malloc(tmp_anybuf->dataLen + 1));
   if (NULL == *outData) {
     printf("malloc failed..\n");
+    LogASN1.Log(__FILE__, 
+                 __LINE__, 
+                 ItcastLog::ERROR, 
+                 21, 
+                 "malloc failed...\n");
     return 21;
   }
 
@@ -212,6 +302,11 @@ int SequenceASN1::unpackSequence(char* inData, int inLen) {
   //参数检查
   if (NULL == inData || inLen <= 0) {
     printf("unpackSequence: the parameter is invalid...\n");
+    LogASN1.Log(__FILE__, 
+                 __LINE__, 
+                 ItcastLog::ERROR, 
+                 22, 
+                 "unpackSequence: the parameter is invalid...\n");
     return 22;
   }
 
@@ -222,12 +317,22 @@ int SequenceASN1::unpackSequence(char* inData, int inLen) {
 
   if (0 != retval) {
     printf("string to ANUBUF failed...\n");
+    LogASN1.Log(__FILE__, 
+                 __LINE__, 
+                 ItcastLog::ERROR, 
+                 23, 
+                 "string to ANUBUF failed...\n");
     return 23;
   }
 
   retval = DER_ItAsn1_ReadSequence(m_temp, &m_header);
   if (0 != retval) {
     printf("unpackSequence failed...\n");
+    LogASN1.Log(__FILE__, 
+                 __LINE__, 
+                 ItcastLog::ERROR, 
+                 24, 
+                 "unpackSequence failed...\n");
     return 24;
   }
 
@@ -238,9 +343,14 @@ int SequenceASN1::unpackSequence(char* inData, int inLen) {
 }
 
  //释放序列
-void SequenceASN1::freeSequnce(ITCAST_ANYBUF* node = NULL) {
+void SequenceASN1::freeSequnce(ITCAST_ANYBUF* node) {
   
+  if (NULL == node) {
+   DER_ITCAST_FreeQueue(m_header);
+  }
+  else {
     DER_ITCAST_FreeQueue(node);
+  }
     m_header = NULL;
     m_next = NULL;
     m_temp = NULL;
